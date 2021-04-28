@@ -1,0 +1,29 @@
+.cart-container{
+    width: 80%;
+    margin: 40px auto;
+    text-align: center;
+}
+
+.cart-container h1{
+    padding-top: 1rem;
+}
+
+.total{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-clear{
+    text-transform: uppercase;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid red;
+}
+
+.btn-clear:hover, .btn-clear:focus{
+    cursor: pointer;
+    background-color: rgb(232, 80, 110);
+}

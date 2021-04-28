@@ -1,0 +1,23 @@
+nav{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    background-color: #2D80C0;
+    color: white;
+    padding: 1rem 5rem 1rem 5rem;
+    font-size: 3rem;
+}
+.total-quantity{
+    background-color: red;
+    font-size: 1rem;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    position: absolute;
+    top: 0.5rem;
+    right: 4rem;
+}

@@ -1,7 +1,11 @@
+import Navbar from "./components/Navbar";
+import ShoppingContainer from "./components/ShoppingContainer";
+
 function App() {
   return (
     <div className="App">
-aze,azelr kazerzlmer kzlmer
+      <Navbar />
+      <ShoppingContainer />
     </div>
   );
 }
