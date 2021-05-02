@@ -1,4 +1,4 @@
-export default listItem = [
+const listItem = [
     {
       id: 1,
       title: 'Samsung Galaxy S7',
@@ -24,3 +24,5 @@ export default listItem = [
       amount: 1,
     },
   ];
+
+  export default listItem;
