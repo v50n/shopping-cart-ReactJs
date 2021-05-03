@@ -1,9 +1,9 @@
 import CartDetail from "./CartDetail";
 import '../css/ShoppingContainer.css';
-import {GetValShoppingCartContext} from '../Context';
+import {useGetValShoppingCartContext} from '../Context';
 
 const ShoppingContainer = () =>{
-    const {listItems, totalPrice} = GetValShoppingCartContext();
+    const {listItems, totalPrice,clearAll} = useGetValShoppingCartContext();
     return (
         <div className="cart-container">
             <h1>Your bag</h1>
@@ -18,7 +18,7 @@ const ShoppingContainer = () =>{
                 <h3>Total</h3>
                 <div className="price">${totalPrice}</div>
             </div>
-            <button className="btn-clear">Clear Cart</button>
+            <button className="btn-clear" onClick={clearAll}>Clear Cart</button>
         </div>
     )
 };

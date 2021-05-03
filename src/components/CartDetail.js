@@ -1,15 +1,9 @@
 import {BsChevronUp, BsChevronDown} from 'react-icons/bs';
 import '../css/CartDetail.css';
-import { GetValShoppingCartContext } from '../Context';
+import { useGetValShoppingCartContext } from '../Context';
 
 const CartDetail = ({id,title,price,img,amount}) =>{
-    const {increment, getTotalProduct,getTotalPrice} = GetValShoppingCartContext();
-    const handleIncrement = (e) =>{
-        increment(e.target.parentNode.parentNode.parentNode.id);
-        getTotalProduct();
-        getTotalPrice();
-    }
-    
+    const {increment,decrement,removeItem} = useGetValShoppingCartContext();
 
     return (
         <div className="cart-detail" id={id}>
@@ -19,12 +13,12 @@ const CartDetail = ({id,title,price,img,amount}) =>{
             <div className="product-detail">
                 <div className="name">{title}</div>
                 <div className="price">${price}</div>
-                <button className="btn-remove-product">remove</button>
+                <button className="btn-remove-product" onClick={() => removeItem(id)}>remove</button>
             </div>
             <div className="quantity" >
-                <div><BsChevronUp onClick={handleIncrement} className="btn-increment"/></div>
+                <div><BsChevronUp onClick={() => increment(id)} className="btn-increment"/></div>
                 <div className="q">{amount}</div>
-                <div><BsChevronDown className="btn-decrement" /></div>
+                <div><BsChevronDown onClick={() => decrement(id)} className="btn-decrement" /></div>
             </div>
 
         </div>

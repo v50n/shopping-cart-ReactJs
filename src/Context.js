@@ -1,4 +1,4 @@
-import React, {useState, useContext, useReducer} from 'react';
+import React, { useContext, useReducer, useEffect} from 'react';
 import listItem from './data';
 import reducerShoppingList from './reducer/Reducer';
 
@@ -7,7 +7,7 @@ const ShoppingCartContext = React.createContext();
 const initialState = {
     totalProduct: listItem.reduce((total,item) =>{ return total + item.amount},0),
     totalPrice: listItem.reduce((total,item) =>{ return total + item.price*item.amount},0),
-    listItems: listItem,
+    listItems: listItem
 }
 
 const AppProvider = ({children}) => {
@@ -35,20 +35,40 @@ const AppProvider = ({children}) => {
             type: 'getTotalPrice'
         })
     }
+    const clearAll = () =>{
+        action({
+            type: 'clearAll'
+        })
+    }
+    const removeItem = (index) =>{
+        action({
+            type: 'removeItem',
+            index
+        })
+    }
+    useEffect(()=>{
+        getTotalPrice();
+        getTotalProduct()
+    }, [state.listItems])
     return(
         <ShoppingCartContext.Provider value={{
             ...state,
             increment,
             getTotalProduct,
-            getTotalPrice
+            getTotalPrice,
+            clearAll,
+            decrement,
+            removeItem
         }}>
             {children}
         </ShoppingCartContext.Provider>
     )
 }
-const GetValShoppingCartContext = () =>{
-    return useContext(ShoppingCartContext);
+
+// custom hook, make sure have useXXXXXXX
+const useGetValShoppingCartContext = () =>{
+    return useContext(ShoppingCartContext); 
 }
 
 
-export {AppProvider, GetValShoppingCartContext};
+export {AppProvider, ShoppingCartContext, useGetValShoppingCartContext};

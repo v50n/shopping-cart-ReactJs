@@ -1,9 +1,9 @@
 import {GiShoppingCart} from 'react-icons/gi';
 import '../css/navbar.css';
-import { GetValShoppingCartContext } from '../Context';
+import { useGetValShoppingCartContext } from '../Context';
 
 const Navbar = () => {
-    const {totalProduct} = GetValShoppingCartContext();
+    const {totalProduct} = useGetValShoppingCartContext();
     return (
         <nav>
             <div className="logo">

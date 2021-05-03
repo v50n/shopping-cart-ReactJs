@@ -6,6 +6,8 @@
 
 export default function reducerShoppingList(state, action) {
   var newListItem;
+  var totalProduct;
+  var price;
     switch (action.type) {
       case 'increment':
         newListItem = state.listItems.map((item,index) => {
@@ -14,20 +16,41 @@ export default function reducerShoppingList(state, action) {
           }
           return item
         })
-        //var total = newListItem.reduce((total,item) =>{ return total + item.amount},0)
         return {...state, listItems: newListItem};
+
       case 'decrement':
-        return {count: state.count - 1};
-      case 'remove_all': // for the case of remove only 1 product, we will update with useState in ShoppingContainer
-        return { count: 0};
+        newListItem = state.listItems.map((item,index) => {
+          if(index === parseInt(action.index)){
+            if(item.amount <= 1){
+              return {...item, amount: 0}
+            }
+            return {...item, amount: item.amount-1}
+          }
+          return item
+        }).filter((item) => item.amount > 0);
+        return {...state, listItems: newListItem};
+
       case 'getTotalProduct': 
-        var total = state.listItems.reduce((total,item) =>{ return total + item.amount},0)
-        return {...state, totalProduct:total }
+        totalProduct = state.listItems.reduce((total,item) =>{ return total + item.amount},0)
+        return {...state, totalProduct: totalProduct}
+
       case 'getTotalPrice': 
-        var price = state.listItems.reduce((total,item) =>{ return total + item.price*item.amount},0)
+        price = state.listItems.reduce((total,item) =>{ return total + item.price*item.amount},0).toFixed(2)
         return {...state, totalPrice: price }
+
+      case 'clearAll': 
+        return {
+            totalProduct: 0,
+            totalPrice: 0,
+            listItems: [],
+        }
+      case 'removeItem' : 
+        newListItem = state.listItems.filter((item,index) => {
+          return index !== parseInt(action.index)
+        })
+        return {...state, listItems: newListItem};
       default:
-        throw new Error();
+        throw new Error("There is an error");
     }
 }
 
